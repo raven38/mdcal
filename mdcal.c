@@ -10,25 +10,35 @@ int daysOfTheWeek(int year, int month, int day){
 }
 
 int main(int argc, char *argv[]){
+  char *first  = "|  Sun  |  Mon  |  Tue  |  Wed  |  Thu  |  Fri  |  Sat  |";
+  char *second = "|------:|------:|------:|------:|------:|------:|------:|";
+  char *br     = "<br>";
+  char *space  = "       |";
+  char *begin  = "|";
   int d[]={31,28,31,30,31,30,31,31,30,31,30,31};
-  int year, month;
+  int year, month, i;
   year = atoi(argv[1]);
   month = atoi(argv[2]);
 
   int c = daysOfTheWeek(month<=2?year-1:year,month<=2?month+12: month, 1);
-
-  printf("%d\n", c);
+  puts(first);  
+  puts(second);
   int day = d[month-1];
   if(month == 2) day += isLeapYear(year);
-  for(int i=0;i<c;i++) printf("  ");
-  for(int i=1;i<=day;i++){
-    printf("%2d", i);
+  printf("%s", begin);
+  for(i=0;i<c;i++) printf("%s", space);
+  for(i=1;i<=day;i++){
+    printf("%3d%s|", i, br);
     c++;
     if(c >= 7){
       puts("");
+      printf("%s", begin);
       c = 0;
     }
   }
-  if(c) puts("");
+  if(c){
+    while(c++%7) printf("%s", space);
+    puts("");
+  }
   return 0;
 }
