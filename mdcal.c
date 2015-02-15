@@ -32,7 +32,7 @@ int main(int argc, char *argv[]){
     c++;
     if(c >= 7){
       puts("");
-      printf("%s", begin);
+      if(i!=day)printf("%s", begin);            
       c = 0;
     }
   }
